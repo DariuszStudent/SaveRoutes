@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveRoutes", "SaveRoutes\SaveRoutes.csproj", "{7B2DDBBF-D56E-40C3-B5F3-F0914234671B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveRoutes.Core", "SaveRoutes.Core\SaveRoutes.Core.csproj", "{DE508ED1-3031-45D4-8535-DC6C365D6B98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B2DDBBF-D56E-40C3-B5F3-F0914234671B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2DDBBF-D56E-40C3-B5F3-F0914234671B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2DDBBF-D56E-40C3-B5F3-F0914234671B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2DDBBF-D56E-40C3-B5F3-F0914234671B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE508ED1-3031-45D4-8535-DC6C365D6B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE508ED1-3031-45D4-8535-DC6C365D6B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE508ED1-3031-45D4-8535-DC6C365D6B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE508ED1-3031-45D4-8535-DC6C365D6B98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3AE2C76-D422-4992-B9DB-918B3A1B6E0A}
+	EndGlobalSection
+EndGlobal
