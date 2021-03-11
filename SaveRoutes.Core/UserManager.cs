@@ -6,38 +6,24 @@ namespace SaveRoutes.Core
     public class UserManager
     {
         private List<User> Users { get; set; }
+        public string fileName { get; set; } = "Users.txt";
 
-        private string Filename { get; set; } = "users.txt";
-
+        FileManager fileManager = new FileManager();
+        
         public UserManager()
         {
             Users = new List<User>();
 
-            if (!File.Exists(Filename)) return;
-
-            var fileLines = File.ReadAllLines(Filename);           
-            foreach (var line in fileLines)
-            {
-                var lineItems = line.Split(';');
-                if (int.TryParse(lineItems[0], out var id))
-                {
-                    AddNewUser(id, lineItems[1], lineItems[2], false);
-                }    
-            }
+            fileManager.AddUserFileToCTor(fileName, AddNewUser);            
         }
 
-        public void AddNewUser(int id, string name, string surname, bool shouldToSaveToFile = true)
+        public void AddNewUser(int id, string firstName, string lastName, bool shouldToSaveToFile = true)
         {
-            var user = new User
-            { 
-                Id = id, 
-                Name = name, 
-                Surname = surname 
-            };
+            var user = new User(id, firstName, lastName);
 
             Users.Add(user);
 
-            if (shouldToSaveToFile) File.AppendAllLines(Filename, new List<string> { user.ToString() });
+            if (shouldToSaveToFile) fileManager.AddUser(fileName, user);
         }
 
         public void RemoveUser(int id)
@@ -57,8 +43,7 @@ namespace SaveRoutes.Core
                 listUsers.Add(user.ToString());
             }
 
-            File.Delete(Filename);
-            File.WriteAllLines(Filename, listUsers);
+            fileManager.RemoveItem(fileName, listUsers);
         }
 
         public List<string> ShowListUsers()
@@ -67,7 +52,7 @@ namespace SaveRoutes.Core
 
             foreach (var user in Users)
             {
-                var stringEdit = "Id: " + user.Id + ". " + user.Name + " " + user.Surname;
+                var stringEdit = "Id: " + user.Id + ". " + user.FirstName + " " + user.LastName;
                 usersString.Add(stringEdit);
             }
 

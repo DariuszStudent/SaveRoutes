@@ -2,13 +2,20 @@
 {
     public class User
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public int Id { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+
+        public User(int id, string firstName, string lastName)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+        }
 
         public override string ToString()
         {
-            return Id.ToString() + ";" + Name + ";" + Surname;
+            return Id.ToString() + ";" + FirstName + ";" + LastName;
         }
     }
 }

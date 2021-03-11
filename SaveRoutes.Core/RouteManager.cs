@@ -6,44 +6,24 @@ namespace SaveRoutes.Core
     public class RouteManager
     {
         private List<Route> Routes { get; set; }
+        private string fileName { get; set; } = "routes.txt";
 
-        private string FileName { get; set; } = "routes.txt";
+        FileManager fileManager = new FileManager();
 
         public RouteManager()
         {
             Routes = new List<Route>();
 
-            if (!File.Exists(FileName)) return;
-
-            var fileLines = File.ReadAllLines(FileName);
-            foreach (var line in fileLines)
-            {
-                var lineItems = line.Split(';');
-
-                if (int.TryParse(lineItems[0], out var id))
-                {
-                    AddNewRoute(id, lineItems[1], lineItems[2], lineItems[3], lineItems[4], false);
-                }               
-            }
+            fileManager.AddRouteFileToCTor(fileName, AddNewRoute);
         }
 
         public void AddNewRoute(int id, string container, string route, string shipping, string date, bool shouldSaveToFile = true)
         {
-            Route newRoute = new Route()
-            {
-                Id = id,
-                Container = container,
-                UserRoute = route,
-                Shipping = shipping,
-                Date = date,
-            };
+            Route newRoute = new Route(id, container, route, shipping, date);
 
             Routes.Add(newRoute);
 
-            if (shouldSaveToFile)
-            {
-                File.AppendAllLines(FileName, new List<string> { newRoute.ToString() });
-            }
+            if (shouldSaveToFile) fileManager.AddRoute(fileName, newRoute);
         }
 
         public void RemoveRoute(string userInput, bool shouldSaveToFile = true)
@@ -66,8 +46,7 @@ namespace SaveRoutes.Core
                     routesToSave.Add(route.ToString());
                 }
 
-                File.Delete(FileName);
-                File.WriteAllLines(FileName, routesToSave);
+                fileManager.RemoveItem(fileName, routesToSave);
             }
         }
 
