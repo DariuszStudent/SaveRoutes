@@ -4,9 +4,9 @@ using System.IO;
 
 namespace SaveRoutes.Core
 {
-    public class FileManager
+    public class FileManager : IManager
     {      
-        public void AddUserFileToCTor(string fileName, Action<int, string, string, bool> AddNewUser)
+        public void AddUserToCTor(string fileName, Action<int, string, string, bool> AddNewUser)
         {
             if (!File.Exists(fileName)) return;
 
@@ -21,7 +21,7 @@ namespace SaveRoutes.Core
             }
         }
 
-        public void AddRouteFileToCTor(string fileName, Action<int, string, string, string, string, bool> AddNewRoute)
+        public void AddRouteToCTor(string fileName, Action<int, string, string, string, string, bool> AddNewRoute)
         {
             if (!File.Exists(fileName)) return;
 
