@@ -11,14 +11,13 @@ namespace SaveRoutes.Core
         }
 
         private List<User> Users { get; set; }
-        public string fileName { get; set; } = "Users.txt";
         private IManager manager { get; set; } = GetManager();
         
         public UserManager()
         {
             Users = new List<User>();
 
-            manager.AddUserToCTor(fileName, AddNewUser);            
+            manager.AddUserToCTor(AddNewUser);            
         }
 
         public void AddNewUser(int id, string firstName, string lastName, bool shouldToSaveToFile = true)
@@ -27,7 +26,7 @@ namespace SaveRoutes.Core
 
             Users.Add(user);
 
-            if (shouldToSaveToFile) manager.AddUser(fileName, user);
+            if (shouldToSaveToFile) manager.AddUser(user);
         }
 
         public void RemoveUser(int id)
@@ -47,7 +46,7 @@ namespace SaveRoutes.Core
                 listUsers.Add(user.ToString());
             }
 
-            manager.RemoveItem(fileName, listUsers);
+            manager.RemoveUser(listUsers);
         }
 
         public List<string> ShowListUsers()

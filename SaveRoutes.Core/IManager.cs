@@ -5,14 +5,16 @@ namespace SaveRoutes.Core
 {
     public interface IManager
     {
-        void AddUserToCTor(string fileName, Action<int, string, string, bool> AddNewUser);
+        void AddUserToCTor(Action<int, string, string, bool> AddNewUser);
 
-        void AddRouteToCTor(string fileName, Action<int, string, string, string, string, bool> AddNewRoute);
+        void AddRouteToCTor(Action<int, string, string, string, string, bool> AddNewRoute);
 
-        void AddUser(string fileName, User user);
+        void AddUser(User user);
 
-        void AddRoute(string fileName, Route route);
+        void AddRoute(Route route);
 
-        void RemoveItem(string fileName, List<string> list);
+        void RemoveUser(List<string> list);
+
+        void RemoveRoute(List<string> list);
     }
 }

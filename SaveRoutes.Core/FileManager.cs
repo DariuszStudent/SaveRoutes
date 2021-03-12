@@ -5,12 +5,15 @@ using System.IO;
 namespace SaveRoutes.Core
 {
     public class FileManager : IManager
-    {      
-        public void AddUserToCTor(string fileName, Action<int, string, string, bool> AddNewUser)
-        {
-            if (!File.Exists(fileName)) return;
+    {
+        private string fileNameRoute { get; set; } = "routes.txt";
+        public string fileNameUser { get; set; } = "Users.txt";
 
-            var fileLines = File.ReadAllLines(fileName);
+        public void AddUserToCTor(Action<int, string, string, bool> AddNewUser)
+        {
+            if (!File.Exists(fileNameUser)) return;
+
+            var fileLines = File.ReadAllLines(fileNameUser);
             foreach (var line in fileLines)
             {
                 var lineItems = line.Split(';');
@@ -21,11 +24,11 @@ namespace SaveRoutes.Core
             }
         }
 
-        public void AddRouteToCTor(string fileName, Action<int, string, string, string, string, bool> AddNewRoute)
+        public void AddRouteToCTor(Action<int, string, string, string, string, bool> AddNewRoute)
         {
-            if (!File.Exists(fileName)) return;
+            if (!File.Exists(fileNameRoute)) return;
 
-            var fileLines = File.ReadAllLines(fileName);
+            var fileLines = File.ReadAllLines(fileNameRoute);
             foreach (var line in fileLines)
             {
                 var lineItems = line.Split(';');
@@ -37,20 +40,26 @@ namespace SaveRoutes.Core
             }
         }
 
-        public void AddUser(string fileName, User user)
+        public void AddUser(User user)
         {
-            File.AppendAllLines(fileName, new List<string> { user.ToString() });
+            File.AppendAllLines(fileNameUser, new List<string> { user.ToString() });
         }
 
-        public void AddRoute(string fileName, Route route)
+        public void AddRoute(Route route)
         {
-            File.AppendAllLines(fileName, new List<string> { route.ToString() });
+            File.AppendAllLines(fileNameRoute, new List<string> { route.ToString() });
         }
 
-        public void RemoveItem(string fileName, List<string> list)
+        public void RemoveRoute(List<string> list)
         {
-            File.Delete(fileName);
-            File.WriteAllLines(fileName, list);
+            File.Delete(fileNameRoute);
+            File.WriteAllLines(fileNameRoute, list);
+        }
+
+        public void RemoveUser(List<string> list)
+        {
+            File.Delete(fileNameUser);
+            File.WriteAllLines(fileNameUser, list);
         }
     }
 }

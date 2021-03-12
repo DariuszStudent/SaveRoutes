@@ -11,14 +11,13 @@ namespace SaveRoutes.Core
         }
 
         private List<Route> Routes { get; set; }
-        private string fileName { get; set; } = "routes.txt";
         private IManager manager { get; set; } = GetManager();
 
         public RouteManager()
         {
             Routes = new List<Route>();
 
-            manager.AddRouteToCTor(fileName, AddNewRoute);
+            manager.AddRouteToCTor(AddNewRoute);
         }
 
         public void AddNewRoute(int id, string container, string route, string shipping, string date, bool shouldSaveToFile = true)
@@ -27,7 +26,7 @@ namespace SaveRoutes.Core
 
             Routes.Add(newRoute);
 
-            if (shouldSaveToFile) manager.AddRoute(fileName, newRoute);
+            if (shouldSaveToFile) manager.AddRoute(newRoute);
         }
 
         public void RemoveRoute(string userInput, bool shouldSaveToFile = true)
@@ -50,7 +49,7 @@ namespace SaveRoutes.Core
                     routesToSave.Add(route.ToString());
                 }
 
-                manager.RemoveItem(fileName, routesToSave);
+                manager.RemoveRoute(routesToSave);
             }
         }
 
